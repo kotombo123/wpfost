@@ -1,0 +1,31 @@
+<Window x:Class="BookLibrary.AddBookWindow"
+        Title="Add New Book" Height="220" Width="360" 
+        ResizeMode="NoResize" WindowStartupLocation="CenterOwner">
+    <Grid Margin="10">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        
+        <!-- Podgląd okładki -->
+        <StackPanel Grid.Column="0">
+            <Border BorderBrush="Gray" BorderThickness="1" Width="80" Height="100">
+                <TextBlock Text="No Cover" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Border>
+            <Button Content="Browse..." Margin="0,5,0,0" Width="80"/>
+        </StackPanel>
+
+        <!-- Pola tekstowe -->
+        <StackPanel Grid.Column="1" Margin="10,0,0,0">
+            <Label Content="Title:"/>
+            <TextBox x:Name="TitleInput"/>
+            <Label Content="Author:"/>
+            <TextBox x:Name="AuthorInput"/>
+            
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,20,0,0">
+                <Button Content="Save" Width="60" Margin="0,0,10,0" IsEnabled="False"/>
+                <Button Content="Cancel" Width="60" Click="Cancel_Click"/>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>
