@@ -1,0 +1,76 @@
+<Window x:Class="BookLibrary.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Libre v1.0" Height="600" Width="1000" MinHeight="480" MinWidth="800">
+    
+    <Window.Resources>
+        <!-- Gradient dla paska bocznego wg hints -->
+        <LinearGradientBrush x:Key="SidebarBrush" StartPoint="0,0" EndPoint="1,0">
+            <GradientStop Color="#2c3e50" Offset="0.0" />
+            <GradientStop Color="#34495e" Offset="1.0" />
+        </LinearGradientBrush>
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/> <!-- Menu -->
+            <RowDefinition Height="*"/>    <!-- Content -->
+            <RowDefinition Height="56"/>   <!-- Status Bar -->
+        </Grid.RowDefinitions>
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="220"/> <!-- Sidebar -->
+            <ColumnDefinition Width="*"/>   <!-- Main Area -->
+        </Grid.ColumnDefinitions>
+
+        <!-- Menu z polecenia -->
+        <Menu Grid.Row="0" Grid.ColumnSpan="2">
+            <MenuItem Header="Library">
+                <MenuItem Header="New..."/>
+                <MenuItem Header="Save" InputGestureText="Ctrl+S"/>
+            </MenuItem>
+            <MenuItem Header="Books">
+                <MenuItem Header="Import..."/>
+                <MenuItem Header="Delete" InputGestureText="Del"/>
+            </MenuItem>
+            <MenuItem Header="Collections">
+                <MenuItem Header="New..." Click="AddNewBook_Click"/>
+            </MenuItem>
+        </Menu>
+
+        <!-- Sidebar (ListBox z ikonami) -->
+        <ListBox Grid.Row="1" Grid.Column="0" Background="{StaticResource SidebarBrush}" BorderThickness="0">
+            <ListBoxItem Foreground="White" Padding="10">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="20" Height="20" Fill="Gold" Margin="0,0,10,0"/>
+                    <TextBlock Text="Authors"/>
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem Foreground="White" Padding="10">
+                <StackPanel Orientation="Horizontal">
+                    <Rectangle Width="20" Height="20" Fill="SkyBlue" Margin="0,0,10,0"/>
+                    <TextBlock Text="Series"/>
+                </StackPanel>
+            </ListBoxItem>
+        </ListBox>
+
+        <!-- Main DataGrid (Książki) -->
+        <DataGrid x:Name="BooksGrid" Grid.Row="1" Grid.Column="1" 
+                  AutoGenerateColumns="False" IsReadOnly="True" 
+                  SelectionUnit="FullRow" VerticalScrollBarVisibility="Auto">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="#" Binding="{Binding Id}" Width="40"/>
+                <DataGridTextColumn Header="Title" Binding="{Binding Title}" Width="*"/>
+                <DataGridTextColumn Header="Author" Binding="{Binding Author}" Width="*"/>
+                <DataGridTextColumn Header="Genre" Binding="{Binding Genre}" Width="100"/>
+                <DataGridTextColumn Header="Year" Binding="{Binding Year}" Width="60"/>
+                <DataGridTextColumn Header="Publisher" Binding="{Binding Publisher}" Width="150"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Bottom Bar -->
+        <StatusBar Grid.Row="2" Grid.ColumnSpan="2" Background="#f3f3f3">
+            <TextBlock Text="Books: 5 total | 1 selected" VerticalAlignment="Center" Margin="10,0"/>
+        </StatusBar>
+    </Grid>
+</Window>
